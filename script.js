@@ -9,7 +9,30 @@ var userSchedule = [
     { class: "CS 124", startTime: "10:00", endTime: "10:50", day: "T" },
 ];
 
-addClass("CS 174", "14:00", "14:50", "MWF");
+//addClass("CS 174", "14:00", "14:50", "MWF");
+
+printSchedule();
+
+function printSchedule() {
+    daysOfWeek = ["M", "T", "W", "R", "F"];
+    const convertDays = {
+        "M" : "Monday",
+        "T" : "Tuesday",
+        "W" : "Wednesday",
+        "R" : "Thursday",
+        "F" : "Friday"
+    }
+    daysOfWeek.forEach((day) => {
+        console.log(convertDays[day]);
+        userSchedule.forEach((item) => {
+            classDays = item.day.split("");
+            if(classDays.includes(day)) {
+                console.log(item.class + "  " + item.startTime + "-" + item.endTime);
+            }
+        });
+    })
+    
+}
 
 function convertTimes(event) {
     //converts time from xx:xx to minutes
