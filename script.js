@@ -1,3 +1,4 @@
+/*
 var userSchedule = [
     { class: "ECON 103", startTime: "10:00", endTime: "10:50", day: "MW" },
     { class: "ECON 103", startTime: "11:00", endTime: "11:50", day: "F" },
@@ -8,8 +9,21 @@ var userSchedule = [
     { class: "CS 100", startTime: "15:00", endTime: "15:50", day: "F" },
     { class: "CS 124", startTime: "10:00", endTime: "10:50", day: "T" },
 ];
+*/
+
+var userSchedule = [];
+
+addClass("ECON 103", "10:00", "10:50", "MW");
+addClass("ECON 103", "11:00", "11:50", "F");
+addClass("MATH 241", "12:00", "12:50", "MWF");
+addClass("MATH 241", "14:00", "14:50", "T");
+addClass("GEOL 118", "13:00", "13:50", "MWF");
+addClass("ENG 100", "13:00", "13:50", "TR");
+addClass("CS 100", "15:00", "15:50", "F");
+addClass("CS 124", "10:00", "10:50", "T");
 
 //addClass("CS 174", "14:00", "14:50", "MWF");
+//to delete class give each class an id and then just delete by id
 
 printSchedule();
 
@@ -32,6 +46,9 @@ function printSchedule() {
         });
     })
     
+    userSchedule.forEach((item) => {
+        console.log(item.class + ": " + item.id)
+    });
 }
 
 function convertTimes(event) {
@@ -59,7 +76,7 @@ function intersectCheck(range1, range2) {
 
 function addClass(newClass, newStartTime, newEndTime, newDay) {
     //checks for conflicts with other classes
-    var newEvent = {class: newClass, startTime: newStartTime, endTime: newEndTime, day: newDay}
+    var newEvent = {id: generateId(), class: newClass, startTime: newStartTime, endTime: newEndTime, day: newDay}
     days1 = newEvent.day.split("");
 
     //checks all previous classes for time conflicts
@@ -83,4 +100,12 @@ function addClass(newClass, newStartTime, newEndTime, newDay) {
     }
 }
 
+function generateId() {
+    return '_' + Math.random().toString(36).substring(2, 9);
+}
+
+function deleteClass(id) {
+    userSchedule = userSchedule.filter(item => item.id !== id);
+    console.log("Class deleted successfully!");
+}
 
